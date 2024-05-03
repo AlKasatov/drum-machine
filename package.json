@@ -3,12 +3,13 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "/app",
+  "homepage": "https://alkasatov.github.io/drum-machine",
   "baseUrl": ".",
   "scripts": {
     "dev": "concurrently \"vite\" \"npm run tailwind:watch\"",
     "tailwind:watch": "npx tailwindcss -i ./source.css -o ./main.css --watch",
     "build": "tsc && vite build",
+    "deploy": "npm run build && gh-pages -d build",
     "lint:scripts": "eslint --ext .ts,.tsx src",
     "lint:fix": "eslint --fix \"./src/**/*.{js,jsx,ts,tsx,json}\"",
     "format": "prettier --write \"./src/**/*.{js,jsx,ts,tsx,css,md,json}\" --config ./.prettierrc"
@@ -35,6 +36,7 @@
     "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-simple-import-sort": "^10.0.0",
+    "gh-pages": "^6.1.1",
     "postcss": "^8.4.38",
     "prettier": "^2.8.8",
     "stylelint-config-prettier": "^9.0.5",
