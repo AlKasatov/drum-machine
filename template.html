@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="../main.css">
+</head>
+<body>
+<div id="root"></div>
+<div class="keyboard">
+  <button data-frequency="880">880</button>
+  <button data-frequency="440">440</button>
+  <button data-frequency="220">220</button>
+  <button data-frequency="110">110</button>
+  <input type="file" accept="*">
+  <button class="play">Play</button>
+  <button class="stop">Stop</button>
+</div>
+<script type="module" src="../src/index.tsx"></script>
+<script>
+
+
+  const audioContext = new AudioContext();
+  const inputFile = document.querySelector("input[type=file]");
+  const playBtn = document.querySelector(".play");
+  const stopBtn = document.querySelector(".stop");
+
+  async function getSample(name) {
+    const data = await fetch(`./${name}`);
+    const arrayBuffer = await data.arrayBuffer();
+    const audioBuffer = await audioContext.decodeAudioData(arrayBuffer);
+    return {
+      name,
+      audioBuffer
+    };
+
+  }
+
+
+  Promise.all([getSample("h.wav"), getSample("k.wav"), getSample("s.wav")]).then(samples => {
+    const map = samples.reduce((acc, item) => {
+      const name = item.name.split(".")[0];
+      acc[name] = item.audioBuffer;
+      return acc;
+    }, {});
+    console.log(map);
+
+    const tracks = [
+      ["k", "_", "_", "k", "_", "_", "_", "k", "_", "k", "_", "k", "_", "_", "_", "_"],
+      ["_", "_", "_", "_", "s", "_", "_", "_", "_", "_", "_", "_", "s", "_", "_", "_"],
+      ["_", "_", "h", "h", "_", "h", "h", "_", "h", "_", "h", "_", "_", "h", "h", "h"]
+    ];
+    let currentIndex = 0;
+
+    let interval;
+    playBtn.onclick = () => {
+      interval = setInterval(() => {
+        tracks.forEach(track => {
+          const key = track[currentIndex % tracks[0].length];
+          if (key !== "_") {
+            play(map[key]);
+
+          }
+        });
+        currentIndex++;
+      }, 125);
+    };
+    stopBtn.onclick = () => {
+      clearInterval(interval);
+      currentIndex = 0;
+    };
+
+
+  });
+
+  function play(audioBuffer) {
+    sourceNode = audioContext.createBufferSource();
+    sourceNode.buffer = audioBuffer;
+
+    // Создаем узел управления громкостью и подключаем его к контексту
+    gainNode = audioContext.createGain();
+
+    // Подключаем источник к узлу управления громкостью
+    sourceNode.connect(gainNode);
+
+    // Подключаем узел управления громкостью к выходу аудио контекста
+    gainNode.connect(audioContext.destination);
+
+    // Воспроизводим аудио
+    sourceNode.playbackRate.value = 1;
+    sourceNode.start();
+  }
+
+
+  function prepareAudioBuffer(file, successHandler) {
+
+  }
+
+  inputFile.addEventListener("change", async function(event) {
+    const file = event.target.files[0];
+    if (file) {
+      const arrayBuffer = await file.arrayBuffer();
+      audioBuffer = await audioContext.decodeAudioData(arrayBuffer);
+
+      playBtn.onclick = () => {
+
+        // Создаем источник и подключаем его к контексту
+        sourceNode = audioContext.createBufferSource();
+        sourceNode.buffer = audioBuffer;
+
+        // Создаем узел управления громкостью и подключаем его к контексту
+        gainNode = audioContext.createGain();
+
+        // Подключаем источник к узлу управления громкостью
+        sourceNode.connect(gainNode);
+
+        // Подключаем узел управления громкостью к выходу аудио контекста
+        gainNode.connect(audioContext.destination);
+
+        // Воспроизводим аудио
+        sourceNode.playbackRate.value = 1;
+        sourceNode.start();
+
+      };
+    }
+
+
+  });
+
+
+  // const keyboard = document.querySelector('.keyboard')
+  // audioContext = new AudioContext()
+  // const func = (audioContext) => {
+  //     let gain = null
+  //     return {
+  //         play: (frequency) => {
+  //             let oscillator = new OscillatorNode(audioContext)
+  //             oscillator.type = "sawtooth"
+  //             oscillator.frequency.value = frequency;
+  //             gain = new GainNode(audioContext)
+  //             gain.connect(audioContext.destination);
+  //             oscillator.connect(gain);
+  //             oscillator.start()
+  //         },
+  //         stop: () => {
+  //             if(gain){
+  //                 gain.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 0.1)
+  //                 gain = null
+  //             }
+
+  //         }
+  //     }
+  // }
+  // const {play, stop} = func(audioContext)
+  // keyboard.onmousedown = (e) => {
+  //     const frequency = +e.target.dataset.frequency
+  //     if(!frequency) {
+  //         return
+  //     }
+  //     play(frequency)
+  //     keyboard.onmouseup = () => {
+  //         stop()
+  //         keyboard.onmouseup = null
+  //     }
+  // }
+
+  // const currentPlaying = []
+  // const freqs = [
+  //     [440, 500, 550, 600],
+  //     [500, 520, 530, 560],
+  //     [700, 650, 610, 590],
+  //     [200, 210, 240, 250],
+  //     [530, 520, 530, 550],
+  //     [420, 400, 110, 210],
+  // ]
+  // let currentIndex = 0
+  // setInterval(() => {
+  //     currentPlaying.forEach(item => {
+  //         item.stop()
+  //     })
+  //     currentPlaying.length = 0
+  //     freqs.forEach((row, index) => {
+  //         const current = func(audioContext)
+  //         currentPlaying.push(current)
+  //         const freq = currentIndex % freqs[0].length
+  //         current.play(freqs[index][freq])
+  //     })
+  //     currentIndex++
+  // }, 100)
+
+  function randomInteger(min, max) {
+    // случайное число от min до (max+1)
+    let rand = min + Math.random() * (max + 1 - min);
+    return Math.floor(rand);
+  }
+</script>
+</body>
+</html>
