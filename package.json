@@ -1,0 +1,46 @@
+{
+  "name": "metatime-client",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "homepage": "/app",
+  "baseUrl": ".",
+  "scripts": {
+    "dev": "concurrently \"vite\" \"npm run tailwind:watch\"",
+    "tailwind:watch": "npx tailwindcss -i ./source.css -o ./main.css --watch",
+    "build": "tsc && vite build",
+    "lint:scripts": "eslint --ext .ts,.tsx src",
+    "lint:fix": "eslint --fix \"./src/**/*.{js,jsx,ts,tsx,json}\"",
+    "format": "prettier --write \"./src/**/*.{js,jsx,ts,tsx,css,md,json}\" --config ./.prettierrc"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@rollup/plugin-terser": "^0.4.4",
+    "@trivago/prettier-plugin-sort-imports": "^4.1.1",
+    "@types/node": "^18.14.6",
+    "@types/react": "^18.0.27",
+    "@types/react-dom": "^18.0.10",
+    "@typescript-eslint/eslint-plugin": "^5.54.0",
+    "@typescript-eslint/parser": "^5.54.0",
+    "@vitejs/plugin-react-swc": "^3.2.0",
+    "autoprefixer": "^10.4.19",
+    "concurrently": "^8.2.2",
+    "eslint": "^8.40.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-react": "^7.32.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-simple-import-sort": "^10.0.0",
+    "postcss": "^8.4.38",
+    "prettier": "^2.8.8",
+    "stylelint-config-prettier": "^9.0.5",
+    "tailwindcss": "^3.4.3",
+    "typescript": "^4.9.5",
+    "vite": "^4.1.0",
+    "vite-plugin-fonts": "^0.7.0"
+  }
+}
