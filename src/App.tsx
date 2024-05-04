@@ -1,3 +1,13 @@
+import { clearMatrix } from '@src/models/$patternMatrix'
+import { DrumRoll } from '@src/views/DrumRoll'
+import { PlayBtn } from '@src/views/PlayBtn'
+
 export const App = () => {
-  return <div className={'p-5 mt-7 text-orange-700 text-3xl'}>Hello</div>
+  return (
+    <div className={''}>
+      <button onClick={clearMatrix}>Clear</button>
+      <PlayBtn />
+      <DrumRoll />
+    </div>
+  )
 }
