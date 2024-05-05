@@ -1,7 +1,7 @@
 import { createStore } from '@src/utils/store/createStore'
 
 const MATRIX_WIDTH = 16
-const MATRIX_HEIGHT = 8
+const MATRIX_HEIGHT = 3
 export const $patternMatrix = createStore<boolean[][]>(
   new Array(MATRIX_HEIGHT).fill(
     new Array(MATRIX_WIDTH).fill(false)
