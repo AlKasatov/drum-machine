@@ -7,7 +7,6 @@ module.exports = {
   transform: {
     "^.+\\.(ts|tsx)$": "ts-jest"
   },
-  // Укажите псевдонимы путей, если вы их используете
   moduleNameMapper: {
     "^@src/(.*)$": __dirname + "/src/$1"
   }

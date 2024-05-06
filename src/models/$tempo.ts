@@ -9,7 +9,7 @@ export const $tempo = createStore({
 export const setTempoByBpm = (bpm: number) => {
   $tempo.setData({
     bpm: constrainBpm(bpm),
-    ms: Math.floor(15_000 / bpm),
+    ms: Math.floor(15_000 / constrainBpm(bpm)),
   })
 }
 
