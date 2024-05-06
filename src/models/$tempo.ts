@@ -1,3 +1,4 @@
+import { constrainBpm } from '@src/utils/constrainBpm'
 import { createStore } from '@src/utils/store/createStore'
 
 export const $tempo = createStore({
@@ -7,14 +8,15 @@ export const $tempo = createStore({
 
 export const setTempoByBpm = (bpm: number) => {
   $tempo.setData({
-    bpm,
+    bpm: constrainBpm(bpm),
     ms: Math.floor(15_000 / bpm),
   })
 }
 
 export const setTempoByIntervalMs = (ms: number) => {
+  const constrainedBpm = constrainBpm(Math.floor(60_000 / ms))
   $tempo.setData({
-    bpm: Math.floor(60_000 / ms),
-    ms: Math.floor(ms / 4),
+    bpm: constrainedBpm,
+    ms: Math.floor(15_000 / constrainedBpm),
   })
 }

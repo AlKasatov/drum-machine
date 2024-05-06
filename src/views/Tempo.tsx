@@ -1,3 +1,4 @@
+import { MAX_BPM, MIN_BPM } from '@src/constants'
 import { tapTempo } from '@src/controls/play'
 import { $tempo, setTempoByBpm } from '@src/models/$tempo'
 import { useStore } from '@src/utils/store/useStore'
@@ -9,8 +10,8 @@ export const Tempo = () => {
       <div className={'mr-2 text-blue-500'}>BPM:</div>
       <input
         className={'w-16 text-center text-blue-600 outline-blue-500'}
-        min={20}
-        max={240}
+        min={MIN_BPM}
+        max={MAX_BPM}
         type="number"
         value={value}
         onChange={(e: any) => {
