@@ -1,7 +1,15 @@
 export const TRACKS = [
   {
-    title: 'Hi-hat',
+    title: 'Closed hh',
     fileName: 'hh',
+  },
+  {
+    title: 'Opened hh',
+    fileName: 'oh',
+  },
+  {
+    title: 'Clap',
+    fileName: 'cl',
   },
   {
     title: 'Snare',

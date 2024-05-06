@@ -2,10 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-.text-orange-700 {
-    color: red;
-}
-
-.text-center {
-    font-size: 400px;
+.montserrat {
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: normal;
+    font-style: normal;
 }

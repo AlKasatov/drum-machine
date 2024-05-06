@@ -1,7 +1,8 @@
+import { TRACKS } from '@src/constants'
 import { createStore } from '@src/utils/store/createStore'
 
 const MATRIX_WIDTH = 16
-const MATRIX_HEIGHT = 3
+const MATRIX_HEIGHT = TRACKS.length
 export const $patternMatrix = createStore<boolean[][]>(
   new Array(MATRIX_HEIGHT).fill(
     new Array(MATRIX_WIDTH).fill(false)

@@ -13,6 +13,7 @@ export const DrumRoll = () => {
   const currentPosition = useStore($currentPlayPosition)
   return (
     <div
+      className={'bg-blue-50 p-1'}
       onKeyDown={(e) => {
         console.log(e.code)
         keyboardHandler(e.code)
@@ -31,14 +32,14 @@ export const DrumRoll = () => {
                   onClick={() => {
                     handleToggleNote(rowIndex, colIndex)
                   }}
-                  className={`mb-1 w-12 h-8 cursor-pointer ${
+                  className={`mb-1 w-12 h-8 cursor-pointer rounded ${
                     currentNote.rowIndex === rowIndex &&
                     currentNote.colIndex === colIndex
-                      ? 'border-4 border-violet-400'
+                      ? 'border-8 border-blue-700'
                       : ''
                   } ${
                     value
-                      ? 'bg-blue-700'
+                      ? 'bg-blue-500'
                       : colIndex % 4 === 0
                       ? 'bg-blue-200'
                       : 'bg-blue-100'
@@ -47,7 +48,7 @@ export const DrumRoll = () => {
                     currentPosition % drumRoll[0].length === colIndex
                       ? 'opacity-50'
                       : ''
-                  }`}
+                  } hover:opacity-70`}
                   key={`${rowIndex}-${colIndex}`}
                 ></div>
               )
