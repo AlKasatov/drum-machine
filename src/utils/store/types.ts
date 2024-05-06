@@ -1,5 +1,5 @@
 export type Store<T> = {
-  subscribe: (cb: () => void) => () => void
+  subscribe: (cb: (data: T) => void) => () => void
   setData: (data: ((arg: T) => T) | T) => void
   getValue: () => T
 }
@@ -10,14 +10,14 @@ type AsyncData<T> = {
   data: T | null
 }
 export type AsyncStore<T> = {
-  subscribe: (cb: () => void) => () => void
+  subscribe: (cb: (data: T) => void) => () => void
   startChange: (...args: any) => void
   getValue: () => AsyncData<T>
   setData: (data: AsyncData<T>) => void
 }
 
 export type FlagStore = {
-  subscribe: (cb: () => void) => () => void
+  subscribe: (cb: (data: boolean) => void) => () => void
   on: () => void
   off: () => void
   toggle: () => void

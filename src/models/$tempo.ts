@@ -14,7 +14,7 @@ export const setTempoByBpm = (bpm: number) => {
 
 export const setTempoByIntervalMs = (ms: number) => {
   $tempo.setData({
-    bpm: Math.floor(15_000 / ms),
-    ms,
+    bpm: Math.floor(60_000 / ms),
+    ms: Math.floor(ms / 4),
   })
 }
