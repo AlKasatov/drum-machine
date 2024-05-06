@@ -1,13 +1,8 @@
-import { Flag } from '@src/utils/store/types'
+import { FlagStore } from '@src/utils/store/types'
 
-export const createFlag = (initValue: boolean): Flag => {
+export const createFlagStore = (initValue: boolean): FlagStore => {
   let value = initValue
   const cbs = new Set()
-  // const iterateCbs = () => {
-  //   cbs.forEach((cb: any) => {
-  //     cb(value)
-  //   })
-  // }
   return {
     subscribe: (cb: unknown) => {
       cbs.add(cb)

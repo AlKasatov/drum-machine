@@ -1,30 +1,7 @@
-import { createStore } from '@src/utils/store/createStore'
-
-export const $samples = createStore<
-  { name: string; audioBuffer: AudioBuffer }[]
->([])
-
-export const audioContext = new AudioContext()
-
-async function getSample(path: string, name: string) {
-  const data = await fetch(`./${path}`)
-  const arrayBuffer = await data.arrayBuffer()
-  const audioBuffer = await audioContext.decodeAudioData(arrayBuffer)
-  return {
-    name,
-    audioBuffer,
-  }
-}
-
-Promise.all([
-  getSample('sounds/h.wav', 'HiHat'),
-  getSample('sounds/s.wav', 'Snare'),
-  getSample('sounds/k.wav', 'Kick'),
-]).then((samples) => {
-  $samples.setData(samples)
-})
+import { $audioContext } from '@src/models/$audioContext'
 
 export const playAudioBuffer = (audioBuffer: AudioBuffer) => {
+  const audioContext = $audioContext.getValue()
   const sourceNode = audioContext.createBufferSource()
   sourceNode.buffer = audioBuffer
 
@@ -38,6 +15,6 @@ export const playAudioBuffer = (audioBuffer: AudioBuffer) => {
   gainNode.connect(audioContext.destination)
 
   // Воспроизводим аудио
-  sourceNode.playbackRate.value = 1
+  sourceNode.playbackRate.value = 4
   sourceNode.start()
 }

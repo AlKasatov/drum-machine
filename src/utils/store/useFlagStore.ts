@@ -1,7 +1,7 @@
 import { useSyncExternalStore } from 'react'
 
-import { Flag } from '@src/utils/store/types'
+import { FlagStore } from '@src/utils/store/types'
 
-export const useFlagStore = (store: Flag) => {
+export const useFlagStore = (store: FlagStore) => {
   return useSyncExternalStore(store.subscribe, store.getValue)
 }

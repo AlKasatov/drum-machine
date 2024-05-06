@@ -1,3 +1,3 @@
-import { createFlag } from '@src/utils/store/createFlag'
+import { createFlagStore } from '@src/utils/store/createFlagStore'
 
-export const F$isPatternPlaying = createFlag(false)
+export const F$isPatternPlaying = createFlagStore(false)
