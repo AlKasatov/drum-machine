@@ -23,13 +23,13 @@ export const App = () => {
   }
   return (
     <div className={'max-w-7xl w-fit mx-auto montserrat p-2'}>
-      <div className={'flex justify-between p-1 text-xl'}>
+      <div className={'flex justify-between py-4 px-1 text-xl'}>
         <PlayBtn />
         <Tempo />
         <ClearBtn />
       </div>
       <div className="flex g-2">
-        <div className={'p-1'}>
+        <div className={'p-2'}>
           {data?.map((item) => {
             return (
               <div

@@ -22,7 +22,7 @@ export const Tempo = () => {
         className={
           'ml-4 border border-blue-500 rounded text-blue-500 px-2 py-1 hover:bg-blue-100'
         }
-        onClick={tapTempo}
+        onMouseDown={tapTempo}
       >
         TAP
       </button>

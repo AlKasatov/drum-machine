@@ -13,7 +13,7 @@ export const DrumRoll = () => {
   const currentPosition = useStore($currentPlayPosition)
   return (
     <div
-      className={'bg-blue-50 p-1'}
+      className={'bg-blue-50 pt-2 pl-2 pr-2 rounded'}
       onKeyDown={(e) => {
         console.log(e.code)
         keyboardHandler(e.code)
